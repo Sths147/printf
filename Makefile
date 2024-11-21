@@ -6,34 +6,46 @@
 #    By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2024/11/19 15:05:43 by sithomas         ###   ########.fr        #
+#    Updated: 2024/11/21 17:49:27 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -Ilibft
 
 SRC = ft_printf.c \
-	libft/ft_putchar_fd.c \
-	libft/ft_putstr_fd.c \
-	main.c
+	ft_putncount_nbr.c \
+	ft_putncount_unsigned_nbr.c \
+	ft_putncount_char.c \
+	ft_putncount_nbr_hex.c \
+	ft_putncount_str.c \
+	ft_putncount_ptr.c
 
-INC = libftprintf.h
+TEST = main.c
 
 OFILES = $(SRC:.c=.o)
 
-NAME = mytest.out
+OTEST = $(TEST:.c=.o)
 
-all: $(NAME)
+NAME = libftprintf.a
+
+all: libft/libft.a $(NAME)
+
+libft/libft.a:
+	$(MAKE) -C libft
 
 $(NAME): $(OFILES)
-	$(CC) $(CFLAGS) $^ -o $@ 
+	ar rcs $(NAME) $(OFILES)
 
-%.o : %.c
+test : $(OFILES) $(OTEST)
+	$(CC) $(CFLAGS) $(OFILES) $(OTEST) -o test.out
+
+%.o : %.c libft/libft.a Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	$(MAKE) -C libft clean
 	rm -f $(OFILES) $(OBONUS)
 
 fclean: clean

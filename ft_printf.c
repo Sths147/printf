@@ -6,34 +6,58 @@
 /*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:42:56 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/19 15:37:00 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:34:48 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
-int ft_printf(const char *s, ...)
+int	ft_print_this_arg(char c, va_list args)
 {
-    va_list args;
-    int i;
-    
-    va_start(args, s);
-    i = 0;
-    while (s[i])
-    {
-        while (s[i] != '%' && s[i])
-            ft_putchar_fd(s[i++], 1);
-        if (s[i] == '%' && s[i + 1])
-        {
-            i++;
-            if (s[i] == 'c')
-                ft_putchar_fd(va_arg(args, int), 1);
-            else if (s[i] == 's')
-                ft_putstr_fd(va_arg(args, char *), 1);
-            i++;
-        }
-    }
-    return (0);
+	int	count;
+
+	count = 0;
+	if (c == 'c')
+		count += ft_putncount_char(va_arg(args, int));
+	else if (c == 's')
+		count += ft_putncount_str(va_arg(args, char *));
+	else if (c == 'p')
+		count += ft_putncount_ptr(va_arg(args, size_t));
+	else if (c == 'd' || c == 'i')
+		count += ft_putncount_nbr(va_arg(args, int));
+	else if (c == 'u')
+		count += ft_putncount_unsigned_nbr(va_arg(args, unsigned int));
+	else if (c == 'x')
+		count += ft_putncount_nbr_hex(va_arg(args, size_t), SMALL_HEX);
+	else if (c == 'X')
+		count += ft_putncount_nbr_hex(va_arg(args, size_t), CAP_HEX);
+	else if (c == '%')
+		count += ft_putncount_char('%');
+	return (count);
+}
+
+int	ft_printf(const char *s, ...)
+{
+	va_list	args;
+	int		i;
+	int		count;
+
+	va_start(args, s);
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		while (s[i] != '%' && s[i])
+			count += ft_putncount_char(s[i++]);
+		if (s[i] == '%' && s[i + 1])
+		{
+			i++;
+			count += ft_print_this_arg(s[i], args);
+			i++;
+		}
+	}
+	return (count);
 }
 
 /*
@@ -48,16 +72,19 @@ Variadic functions (VF)
 
 can handle any number of arguments
 
-generic prototype : type function(type param1, type param2, ..., type paramN, ...);
+generic prototype : type function(type param1, type param2, ..., type paramN,
+	...);
 
 has at least one fixed argument (explicited in prototype) any any optional numbers of args (... in proto)
 
-Macros: 
-1. va_start(va_list args, void last) : initialise an args variable with va_list type. 
-    We will acess variadic arguments with args.
-    Args is located after the last fixed argument
+Macros:
+1. va_start(va_list args,
+	void last) : initialise an args variable with va_list type.
+	We will acess variadic arguments with args.
+	Args is located after the last fixed argument
 
-2. va_arg(va_list args, type) : extract the next argument of the list and converts it in type.
+2. va_arg(va_list args,
+	type) : extract the next argument of the list and converts it in type.
 
 3. va_copy(va_list dest, va_list src) : create a copy of the argument list
 
