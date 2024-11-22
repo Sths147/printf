@@ -6,7 +6,7 @@
 /*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:22:18 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/22 11:37:38 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:42:19 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	ft_putncount_ptr_hex(size_t nb, char *hextype)
 	if (nb >= 16)
 	{
 		count += ft_putncount_ptr_hex(nb / 16, hextype);
-		count += ft_putncount_char((unsigned char)hextype[nb % 16]);
+		count += ft_putncount_char(hextype[nb % 16]);
 	}
 	else
-		count += ft_putncount_char((unsigned char)hextype[nb]);
+		count += ft_putncount_char(hextype[nb]);
 	return (count);
 }
