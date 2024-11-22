@@ -6,7 +6,7 @@
 /*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:42:56 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/22 11:39:45 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:51:45 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_printf(const char *s, ...)
 	va_start(args, s);
 	i = 0;
 	count = 0;
+	if (!s)
+		return (-1);
 	while (s[i])
 	{
 		while (s[i] != '%' && s[i])
@@ -54,6 +56,11 @@ int	ft_printf(const char *s, ...)
 			i++;
 			count += ft_print_this_arg(s[i], args);
 			i++;
+		}
+		if (s[i] == '%' && !s[i + 1])
+		{
+			i++;
+			return (-1);
 		}
 	}
 	return (count);
