@@ -6,34 +6,23 @@
 /*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:22:18 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/21 19:48:16 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:37:57 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putncount_nbr_hex(long nb, char *hextype)
+int	ft_putncount_nbr_hex(unsigned int nb, char *hextype)
 {
 	int	count;
 
 	count = 0;
-	if (nb == LONG_MIN)
+	if (nb >= 16)
 	{
 		count += ft_putncount_nbr_hex(nb / 16, hextype);
-		count += ft_putncount_char((unsigned char)hextype[nb % 16]);
-	}
-	if (nb < 0)
-	{
-		count += ft_putncount_char('-');
-		nb = -nb;
-		count += ft_putncount_nbr_hex(nb, hextype);
-	}
-	else if (nb >= 16)
-	{
-		count += ft_putncount_nbr_hex(nb / 16, hextype);
-		count += ft_putncount_char((unsigned char)hextype[nb % 16]);
+		count += ft_putncount_char(hextype[nb % 16]);
 	}
 	else
-		count += ft_putncount_char((unsigned char)hextype[nb]);
+		count += ft_putncount_char(hextype[nb]);
 	return (count);
 }
