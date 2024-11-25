@@ -6,13 +6,13 @@
 /*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:42:56 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/22 17:35:01 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:35:10 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_this_arg(char c, va_list args)
+static int	ft_print_this_arg(char c, va_list args)
 {
 	int	count;
 
@@ -54,14 +54,11 @@ int	ft_printf(const char *s, ...)
 		if (s[i] == '%' && s[i + 1])
 		{
 			i++;
-			count += ft_print_this_arg(s[i], args);
-			i++;
+			count += ft_print_this_arg(s[i++], args);
 		}
 		if (s[i] == '%' && !s[i + 1])
-		{
-			i++;
 			return (-1);
-		}
+		va_end(args);
 	}
 	return (count);
 }
