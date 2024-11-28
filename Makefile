@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+         #
+#    By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2024/11/22 17:35:14 by sithomas         ###   ########.fr        #
+#    Updated: 2024/11/28 14:52:00 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,26 +20,30 @@ SRC = ft_printf.c \
 	ft_putncount_char.c \
 	ft_putncount_nbr_hex.c \
 	ft_putncount_str.c \
-	ft_putncount_ptr.c
+	ft_putncount_ptr.c \
+
+OBJ_LIBFT = libft/ft_strlen.o
 
 OFILES = $(SRC:.c=.o)
 
 NAME = libftprintf.a
 
-all: libft/libft.a $(NAME)
+all: makelibft $(NAME)
 
-libft/libft.a:
+libft/libft.a: makelibft
+
+makelibft:
 	$(MAKE) -C libft
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	ar rcs $(NAME) $(OFILES) $(OBJ_LIBFT)
 
 %.o : %.c libft/libft.a Makefile ft_printf.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
 	$(MAKE) -C libft fclean
-	rm -f $(OFILES) $(OBONUS)
+	rm -f $(OFILES) $(OBONUS) *.o
 
 fclean: clean
 	rm -f $(NAME)

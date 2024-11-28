@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putncount_char.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:14:02 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/22 17:35:06 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:23:09 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	ft_putncount_char(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }

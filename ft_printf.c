@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sithomas <sithomas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:42:56 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/25 18:35:10 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:47:57 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,61 @@
 
 static int	ft_print_this_arg(char c, va_list args)
 {
+	if (c == 'c')
+		return (ft_putncount_char(va_arg(args, int)));
+	else if (c == 's')
+		return (ft_putncount_str(va_arg(args, char *)));
+	else if (c == 'p')
+		return (ft_putncount_ptr(va_arg(args, size_t)));
+	else if (c == 'd' || c == 'i')
+		return (ft_putncount_nbr(va_arg(args, int)));
+	else if (c == 'u')
+		return (ft_putncount_unsigned_nbr(va_arg(args, unsigned int)));
+	else if (c == 'x')
+		return (ft_putncount_nbr_hex(va_arg(args, unsigned int), SMALL_HEX));
+	else if (c == 'X')
+		return (ft_putncount_nbr_hex(va_arg(args, unsigned int), CAP_HEX));
+	else if (c == '%')
+		return (ft_putncount_char('%'));
+	return (-1);
+}
+
+static int	ft_checknprint_arg(const char **s, va_list args)
+{
 	int	count;
 
-	count = 0;
-	if (c == 'c')
-		count += ft_putncount_char(va_arg(args, int));
-	else if (c == 's')
-		count += ft_putncount_str(va_arg(args, char *));
-	else if (c == 'p')
-		count += ft_putncount_ptr(va_arg(args, size_t));
-	else if (c == 'd' || c == 'i')
-		count += ft_putncount_nbr(va_arg(args, int));
-	else if (c == 'u')
-		count += ft_putncount_unsigned_nbr(va_arg(args, unsigned int));
-	else if (c == 'x')
-		count += ft_putncount_nbr_hex(va_arg(args, unsigned int), SMALL_HEX);
-	else if (c == 'X')
-		count += ft_putncount_nbr_hex(va_arg(args, unsigned int), CAP_HEX);
-	else if (c == '%')
-		count += ft_putncount_char('%');
+	if (**s == '%')
+	{
+		(*s)++;
+		if (!*s)
+			return (-1);
+		count = ft_print_this_arg(**s, args);
+	}
+	else
+		count = ft_putncount_char(**s);
 	return (count);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
-	int		i;
 	int		count;
+	int		check;
 
-	va_start(args, s);
-	i = 0;
 	count = 0;
 	if (!s)
 		return (-1);
-	while (s[i])
+	if (s)
 	{
-		while (s[i] != '%' && s[i])
-			count += ft_putncount_char(s[i++]);
-		if (s[i] == '%' && s[i + 1])
+		va_start(args, s);
+		while (*s)
 		{
-			i++;
-			count += ft_print_this_arg(s[i++], args);
+			check = ft_checknprint_arg(&s, args);
+			if (check < 0)
+				return (-1);
+			count += check;
+			s++;
 		}
-		if (s[i] == '%' && !s[i + 1])
-			return (-1);
 		va_end(args);
 	}
 	return (count);
