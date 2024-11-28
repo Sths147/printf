@@ -6,7 +6,7 @@
 #    By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2024/11/28 14:52:00 by sithomas         ###   ########.fr        #
+#    Updated: 2024/11/28 15:10:25 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(NAME): $(OFILES)
 
 clean:
 	$(MAKE) -C libft fclean
-	rm -f $(OFILES) $(OBONUS) *.o
+	rm -f $(OFILES) $(OBONUS)
 
 fclean: clean
 	rm -f $(NAME)
