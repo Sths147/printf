@@ -6,7 +6,7 @@
 /*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:16:39 by sithomas          #+#    #+#             */
-/*   Updated: 2025/01/06 12:00:35 by sithomas         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:18:34 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	ft_strlen_printf(char *s)
 	size_t	len;
 
 	len = 0;
-	while(s[len])
+	while (s[len])
 		len++;
-	return(len);
+	return (len);
 }
