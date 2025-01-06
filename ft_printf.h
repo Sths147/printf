@@ -6,7 +6,7 @@
 /*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:10:06 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/28 14:53:01 by sithomas         ###   ########.fr       */
+/*   Updated: 2025/01/06 12:00:22 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define FT_PRINTF_H
 # define CAP_HEX "0123456789ABCDEF"
 # define SMALL_HEX "0123456789abcdef"
-# include "libft/libft.h"
 # include <limits.h>
 # include <stdarg.h>
+# include <stddef.h>
+# include <unistd.h>
 
 int	ft_printf(char const *s, ...);
 int	ft_putncount_nbr(int n);

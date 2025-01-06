@@ -6,7 +6,7 @@
 #    By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2024/11/28 15:10:25 by sithomas         ###   ########.fr        #
+#    Updated: 2025/01/06 12:01:00 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,28 +22,20 @@ SRC = ft_printf.c \
 	ft_putncount_str.c \
 	ft_putncount_ptr.c \
 
-OBJ_LIBFT = libft/ft_strlen.o
-
 OFILES = $(SRC:.c=.o)
 
 NAME = libftprintf.a
 
-all: makelibft $(NAME)
-
-libft/libft.a: makelibft
-
-makelibft:
-	$(MAKE) -C libft
+all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES) $(OBJ_LIBFT)
+	ar rcs $(NAME) $(OFILES)
 
-%.o : %.c libft/libft.a Makefile ft_printf.h
+%.o : %.c Makefile ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
-	$(MAKE) -C libft fclean
-	rm -f $(OFILES) $(OBONUS)
+	rm -f $(OFILES)
 
 fclean: clean
 	rm -f $(NAME)

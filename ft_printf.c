@@ -6,9 +6,15 @@
 /*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:42:56 by sithomas          #+#    #+#             */
-/*   Updated: 2024/11/28 13:47:57 by sithomas         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:36:06 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+Accepted arguments after % :
+c, s, p, d, i, u, x, X, %
+if argument differs, printf returns an error result (-1)
+*/
 
 #include "ft_printf.h"
 
