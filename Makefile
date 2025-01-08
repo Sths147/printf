@@ -6,7 +6,7 @@
 #    By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2025/01/08 14:23:55 by sithomas         ###   ########.fr        #
+#    Updated: 2025/01/08 14:28:14 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,9 @@ $(NAME): $(OFILES)
 
 clean:
 	@rm -f $(OFILES)
-	@echo 'printf objs files cleaned'
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo 'printf all cleaned'
 
 re:	fclean all
 
