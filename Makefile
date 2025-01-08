@@ -6,7 +6,7 @@
 #    By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:41:53 by sithomas          #+#    #+#              #
-#    Updated: 2025/01/06 12:01:00 by sithomas         ###   ########.fr        #
+#    Updated: 2025/01/08 14:03:54 by sithomas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,19 @@ NAME = libftprintf.a
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	ar rcs $(NAME) $(OFILES)
+	@ar rcs $(NAME) $(OFILES)
+	@echo 'printf created'
 
 %.o : %.c Makefile ft_printf.h
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
-	rm -f $(OFILES)
+	@rm -f $(OFILES)
+	@echo 'printf .o files cleaned'
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo 'printf all cleaned'
 
 re:	fclean all
 
