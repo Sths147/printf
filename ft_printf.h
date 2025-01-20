@@ -6,7 +6,7 @@
 /*   By: sithomas <sithomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:10:06 by sithomas          #+#    #+#             */
-/*   Updated: 2025/01/20 11:40:34 by sithomas         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:44:39 by sithomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ int	ft_putncount_unsigned_nbr(unsigned int n);
 int	ft_putncount_char(char c);
 int	ft_putncount_nbr_hex(unsigned int nb, char *hextype);
 int	ft_putncount_str(char *s);
+
+/*
+Test3*/
 
 #endif
